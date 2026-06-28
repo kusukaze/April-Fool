@@ -111,6 +111,10 @@ button {
     max-width: 500px;
 }
 
+#your-grade {
+    font-size: 24px;
+}
+
 #grade-title {
     font-size: 28px;
     font-weight: bold;

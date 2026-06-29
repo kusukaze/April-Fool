@@ -50,16 +50,25 @@
 <h1>愚人节小游戏合集</h1>
 <div class="game-links" id="linksContainer"></div>
 
-<script>
+    <script>
         const startYear = 2026;
-        const endYear = 2027;
+        const skippedYears = new Set([]);
+
+        const now = new Date();
+        let endYear;
+        if (now.getMonth() > 2 || (now.getMonth() === 2 && now.getDate() === 31 && now.getHours() >= 20)) {
+            endYear = now.getFullYear();
+        } else {
+            endYear = now.getFullYear() - 1;
+        }
+        endYear = Math.max(endYear, startYear);
 
         const container = document.getElementById('linksContainer');
-        // 获取当前页面的基础 URL（不含文件名）
         const pathParts = window.location.pathname.split('/').slice(0, -1);
         const basePath = window.location.origin + pathParts.join('/') + '/';
 
         for (let year = startYear; year <= endYear; year++) {
+            if (skippedYears.has(year)) continue;
             const link = document.createElement('a');
             link.href = basePath + year;
             link.target = '_blank';
